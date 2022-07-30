@@ -1,0 +1,14 @@
+{
+  "name": "block-fund",
+  "version": "1.0.0",
+  "description": "A blockchain based crowdfunding platform using ethereum, solidity, react.js, node.js, express, mongodb",
+  "scripts": {
+    "devClient": "",
+    "devServer": "",
+    "startClient": "",
+    "startServer": "",
+    "buildContract": ""
+  },
+  "author": "Ummenthala Anish <ummenthala.anish@gmail.com>",
+  "license": "ISC"
+}
