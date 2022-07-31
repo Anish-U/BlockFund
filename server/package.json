@@ -4,13 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "",
-    "start": ""
+    "dev": "concurrently \"tsc -w\" \"nodemon build/apis/server.js\"",
+    "start": "node ./build/apis/server.js",
+    "build": "tsc -p ."
   },
   "author": "Ummenthala Anish <ummenthala.anish@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^5.0.1",
+    "chalk": "^4.1.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongoose": "^6.5.0"
