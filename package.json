@@ -4,9 +4,9 @@
   "description": "A blockchain based crowdfunding platform using ethereum, solidity, react.js, node.js, express, mongodb",
   "scripts": {
     "devClient": "",
-    "devServer": "",
+    "devServer": "cd ./server && npm run dev",
     "startClient": "",
-    "startServer": "",
+    "startServer": "cd ./server && npm run start",
     "buildContract": ""
   },
   "author": "Ummenthala Anish <ummenthala.anish@gmail.com>",
