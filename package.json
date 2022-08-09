@@ -7,7 +7,7 @@
     "devServer": "cd ./server && npm run dev",
     "startClient": "",
     "startServer": "cd ./server && npm run start",
-    "buildContract": ""
+    "startContract": "cd ./blockchain && truffle deploy"
   },
   "author": "Ummenthala Anish <ummenthala.anish@gmail.com>",
   "license": "ISC"

@@ -1,0 +1,32 @@
+.headerContainer {
+	padding: 1rem;
+	display: flex;
+}
+
+.headerLeft,
+.headerRight {
+	flex: 1;
+	margin: 1rem;
+}
+
+.headerMid {
+	flex: 2;
+	text-align: center;
+}
+
+.headerLinks {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.headerTitle {
+	color: #0080ff;
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.headerTagline {
+	color: #838383;
+	font-weight: 600;
+}
