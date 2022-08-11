@@ -12,8 +12,7 @@ import errorHandler from './middlewares/errorHandler';
 import apiRules from './middlewares/apiRules';
 
 // Importing routes
-import contributorRouter from './routes/contributorRouter';
-import creatorRouter from './routes/creatorRouter';
+import userRouter from './routes/userRouter';
 
 // Express application
 const app: Application = express();
@@ -31,8 +30,7 @@ app.use(requestResponse);
 app.use(apiRules);
 
 // Routes
-app.use('/contributor', contributorRouter);
-app.use('/creator', creatorRouter);
+app.use('/user', userRouter);
 
 // HealthCheck Route
 app.get('/ping', (req: Request, res: Response, next: NextFunction) => {

@@ -3,19 +3,19 @@ import mongoose, { Schema } from 'mongoose';
 export enum Gender {
 	male = 'male',
 	female = 'female',
-	other = 'other',
+	others = 'others',
 }
 
-export interface ICreator extends Document {
+export interface IUser extends Document {
 	email: string;
 	password: string;
 	firstName: string;
 	lastName: string;
-	age: number;
+	ethAccount: string;
 	gender?: Gender;
 }
 
-const CreatorSchema: Schema = new mongoose.Schema(
+const UserSchema: Schema = new mongoose.Schema(
 	{
 		email: {
 			type: String,
@@ -34,8 +34,8 @@ const CreatorSchema: Schema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		age: {
-			type: Number,
+		ethAccount: {
+			type: String,
 			required: true,
 		},
 		gender: {
@@ -45,4 +45,4 @@ const CreatorSchema: Schema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-export default mongoose.model<ICreator>('Creator', CreatorSchema);
+export default mongoose.model<IUser>('User', UserSchema);
