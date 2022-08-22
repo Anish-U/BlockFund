@@ -5,13 +5,25 @@ import { Home, Logout, Login, PersonAdd, AddCircle } from '@mui/icons-material';
 import { Avatar, Tooltip } from '@mui/material';
 
 import { stringAvatar } from '../../helpers/avatar';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators, State } from '../../state';
+import { bindActionCreators } from 'redux';
 
 const Header = () => {
-	const user: boolean = true;
-	const name: string = 'Anish ummenthala';
+	const dispatch = useDispatch();
+
+	const { logout } = bindActionCreators(actionCreators, dispatch);
+
+	const user = useSelector((state: State) => state.auth);
 
 	const logOutHandler = () => {
-		alert('Logout clicked');
+		logout();
+
+		localStorage.removeItem('token');
+		localStorage.removeItem('email');
+		localStorage.removeItem('ethAcc');
+		localStorage.removeItem('firstName');
+		localStorage.removeItem('lastName');
 	};
 
 	return (
@@ -34,7 +46,7 @@ const Header = () => {
 							</Link>
 						</Tooltip>
 
-						{user && (
+						{user.isLogged && (
 							<>
 								<Tooltip title='Create Campaign'>
 									<Link to='/createCampaign' style={{ textDecoration: 'none' }}>
@@ -42,9 +54,12 @@ const Header = () => {
 									</Link>
 								</Tooltip>
 
-								<Tooltip title={name}>
+								<Tooltip title={user.userData.email || ''}>
 									<Avatar
-										{...stringAvatar(name)}
+										{...stringAvatar(
+											user.userData.firstName || '',
+											user.userData.lastName || ''
+										)}
 										style={{ fontSize: '12px' }}
 									/>
 								</Tooltip>
@@ -59,7 +74,7 @@ const Header = () => {
 							</>
 						)}
 
-						{!user && (
+						{!user.isLogged && (
 							<>
 								<Tooltip title='Login'>
 									<Link to='/login' style={{ textDecoration: 'none' }}>

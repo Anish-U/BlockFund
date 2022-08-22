@@ -16,15 +16,16 @@ const stringToColor = (string: string) => {
 	return color;
 };
 
-const stringAvatar = (name: string) => {
-	name = name.toUpperCase();
+const stringAvatar = (firstName: string, lastName: string) => {
+	firstName = firstName.toUpperCase();
+	lastName = lastName.toUpperCase();
 	return {
 		sx: {
-			bgcolor: stringToColor(name),
+			bgcolor: stringToColor(firstName),
 			height: 25,
 			width: 25,
 		},
-		children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+		children: `${firstName[0]}${lastName[0]}`,
 	};
 };
 

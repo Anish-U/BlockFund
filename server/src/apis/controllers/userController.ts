@@ -1,12 +1,16 @@
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+
 import { logger } from '../helpers/logger';
+import { config } from '../../configs/config';
 
 import User from '../models/User';
 
 const createUser = async (req: Request, res: Response) => {
 	const { email, firstName, lastName, ethAccount, gender, password } = req.body;
 
-	const hashedPassword = password;
+	const hashedPassword = await bcrypt.hash(password, 12);
 
 	try {
 		const newUser = new User({
@@ -32,6 +36,49 @@ const createUser = async (req: Request, res: Response) => {
 			return res
 				.status(500)
 				.json({ message: error.message + '. Email already exists' });
+
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+const loginUser = async (req: Request, res: Response) => {
+	const { email, password } = req.body;
+
+	try {
+		const user = await User.findOne({ email: email });
+
+		if (!user) {
+			logger.warn('Invalid email');
+			return res.status(400).json({ message: 'Invalid email / password' });
+		}
+
+		const passCheck = await bcrypt.compare(password, user.password);
+
+		if (!passCheck) {
+			logger.warn('Invalid password');
+			return res.status(400).json({ message: 'Invalid email / password' });
+		}
+
+		const token = jwt.sign(
+			{
+				_id: user._id,
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email,
+				ethAccount: user.ethAccount,
+			},
+			config.jwt,
+			{ expiresIn: '1d' }
+		);
+
+		logger.success('User Login Successfully');
+		// logger.info(token);
+
+		res.status(200).json(token);
+	} catch (err: any) {
+		const error: Error = new Error('Server Error');
+
+		logger.error(err);
 
 		return res.status(500).json({ message: error.message });
 	}
@@ -84,6 +131,7 @@ const deleteUser = async (req: Request, res: Response) => {
 
 export default {
 	createUser,
+	loginUser,
 	getUser,
 	deleteUser,
 };

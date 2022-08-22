@@ -8,6 +8,8 @@ const MONGO_STRING: string = process.env.MONGO_STRING || '';
 
 const MONGO_URI: string = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_STRING}`;
 
+const JWT_SECRET: string = process.env.JWT_SECRET || '';
+
 const SERVER_PORT: Number = process.env.SERVER_PORT
 	? Number(process.env.SERVER_PORT)
 	: 5000;
@@ -19,4 +21,5 @@ export const config = {
 	server: {
 		port: SERVER_PORT,
 	},
+	jwt: JWT_SECRET,
 };
